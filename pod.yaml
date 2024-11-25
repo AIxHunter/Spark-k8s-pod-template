@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: spark-docker-pod
+spec:
+  serviceAccountName: sa-spark
+  containers:
+  - name: spark-container
+    image: docker-spark:0.0.0.1
+    args:
+    - "/opt/spark/bin/spark-submit"
+    - "--master"
+    - "k8s://192.168.49.2:8443"
+    - "--deploy-mode"
+    - "cluster"
+    - "--name"
+    - "spark-docker"
+    - "--class"
+    - "org.example.Main"
+    - "--conf"
+    - "spark.executor.instances=2"
+    - "--conf"
+    - "spark.kubernetes.container.image=docker-spark:0.0.0.1"
+    - "--conf"
+    - "spark.kubernetes.authenticate.driver.serviceAccountName=sa-spark"
+    - "--conf"
+    - "spark.kubernetes.namespace=d4rkc0de"
+    - "local:///opt/spark/work-dir/app.jar"
+  restartPolicy: Never
