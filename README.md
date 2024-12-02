@@ -36,7 +36,7 @@ kubectl cluster-info
 Replace https with k8s and replace the ```--master``` parameter with the new master url in the below command or in the pod.yaml file.
 
 
-1. **Submit the Spark job to Kubernetes (2 methods)**:
+5. **Submit the Spark job to Kubernetes (2 methods)**:
 
     **- Run using spark submit**:
     ```console
