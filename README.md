@@ -38,12 +38,14 @@ Replace https with k8s and replace the ```--master``` parameter with the new mas
 
 5. **Submit the Spark job to Kubernetes (2 methods)**:
 
-    **- Run using spark submit**:
-    ```console
-    ./bin/spark-submit --master k8s://192.168.49.2:8443 --deploy-mode cluster --name spark-docker --class org.example.Main --conf spark.executor.instances=2 --conf spark.kubernetes.container.image=docker-spark:0.0.0.1 --conf spark.kubernetes.authenticate.driver.serviceAccountName=sa-spark --conf spark.kubernetes.namespace=default --conf spark.kubernetes.file.upload.path=/tmp/ "local:///opt/spark/work-dir/app.jar"
-    ```
 
     **- Run using a pod template**:
     ```console
     kubectl apply -f pod.yaml
     ```
+    
+    **- Run using spark submit**:
+    ```console
+    ./bin/spark-submit --master k8s://192.168.49.2:8443 --deploy-mode cluster --name spark-docker --class org.example.Main --conf spark.executor.instances=2 --conf spark.kubernetes.container.image=docker-spark:0.0.0.1 --conf spark.kubernetes.authenticate.driver.serviceAccountName=sa-spark --conf spark.kubernetes.namespace=default --conf spark.kubernetes.file.upload.path=/tmp/ "local:///opt/spark/work-dir/app.jar"
+    ```
+
